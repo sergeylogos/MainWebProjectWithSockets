@@ -70,13 +70,15 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 /*without this is use of spring loginpage*/
                 .loginPage("/login")
+               // .loginProcessingUrl("/logMe")
+                //.successForwardUrl("/asd")
                 .passwordParameter("password")
                 .usernameParameter("username")
                 /*---------------------------------------*/
                 .and()
-                .csrf()
-                .and()
-                .exceptionHandling().accessDeniedPage("/accessDeniedPage");
+                .csrf();
+                //.and()
+                //.exceptionHandling().accessDeniedPage("/accessDeniedPage");
 
     }
 }
