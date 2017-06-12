@@ -28,11 +28,22 @@ public class DataConfig {
 
     @Bean
     public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty("db.driver.class.name"));
-        dataSource.setUrl(env.getProperty("db.url"));
-        dataSource.setUsername(env.getProperty("db.user"));
-        dataSource.setPassword(env.getProperty("db.password"));
+      HikariConfig hikariConfig = new HikariConfig();
+           hikariConfig.setDriverClassName("com.mysql.jdbc.Driver");
+           hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/main");
+           hikariConfig.setUsername("root");
+           hikariConfig.setPassword("root");
+
+           hikariConfig.setMaximumPoolSize(5);
+           hikariConfig.setConnectionTestQuery("SELECT 1");
+           hikariConfig.setPoolName("springHikariCP");
+
+           hikariConfig.addDataSourceProperty("dataSource.cachePrepStmts", "true");
+           hikariConfig.addDataSourceProperty("dataSource.prepStmtCacheSize", "250");
+           hikariConfig.addDataSourceProperty("dataSource.prepStmtCacheSqlLimit", "2048");
+           hikariConfig.addDataSourceProperty("dataSource.useServerPrepStmts", "true");
+
+           HikariDataSource dataSource = new HikariDataSource(hikariConfig);
         return dataSource;
     }
 
