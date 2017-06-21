@@ -50,7 +50,7 @@ public class Security extends WebSecurityConfigurerAdapter {
         inMemoryConfigurer()
                 .withUser("a")
                 .password("a")
-                .authorities("ADMIN")
+                .authorities("ROLE_ADMIN")
                 .and()
                 .configure(auth);
         auth.authenticationProvider(provider);
@@ -79,6 +79,12 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .csrf();
                 //.and()
                 //.exceptionHandling().accessDeniedPage("/accessDeniedPage");
+//         .formLogin()
+//                 .loginPage("/toLoginPage")
+//                 .loginProcessingUrl("/logMe")
+//                 .successForwardUrl("/asd")
+//                 .passwordParameter("password")
+//                 .usernameParameter("username")
 
     }
 }
